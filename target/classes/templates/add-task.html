@@ -27,21 +27,16 @@
         <div class="d-flex flex-row" id="navbarNav">
             <ul class="navbar-nav">
                 <!-- All Tasks list -->
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/tasks">All Tasks</a>
-                </li>
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/tasks">All Tasks</a> </li>
                 <!-- Important Tasks -->
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/urgent-tasks">Urgent Tasks</a>
-                </li>
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/urgent-tasks">Urgent Tasks</a> </li>
+                <!-- Normal Tasks -->
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/normal-tasks">Normal Tasks</a> </li>
+                <!-- Trivial Tasks -->
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/trivial-tasks">Trivial Tasks</a> </li>
                 <!-- Finished Tasks -->
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/finished-tasks">Finished Tasks</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/finished-tasks">Finished Tasks</a></li>
             </ul>
-        </div>
-        <div> <!-- Save Task button -->
-            <input type="submit" form="taskForm" value="Save Task" class="btn btn-success"/>
         </div>
     </div>
 </nav>
@@ -52,66 +47,70 @@
 </div>
 
 <div class="container-fluid" style="max-width: 50%">
-            <form id="taskForm" class="text-center" th:object="${task}" th:action="@{/add-task}" method="post">
-                <input type="hidden" th:field="*{owner}"/>
-                <div class="form-group" style="margin: 5px 0px">
+    <form id="taskForm" class="text-center" th:object="${task}" th:action="@{/add-task}" method="post">
+        <input type="hidden" th:field="*{owner}"/>
+        <div class="form-group" style="margin: 5px 0px">
 
-                    <!-- Task Name -->
-                    <div class="form-floating" style="margin:10px 0px">
-                        <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Give your task a name" autofocus="autofocus"/>
-                        <label for="name">Title</label>
-                        <div class="text text-warning"
-                             th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
-                        </div>
-                    </div>
-
-                    <!-- Task Description -->
-                    <div class="form-floating" style="margin:10px 0px">
-                        <input type="text" class="form-control" id="description" th:field="*{description}" placeholder="Describe your task"/>
-                        <label for="description">Description</label>
-                        <div class="text text-warning"
-                             th:if="${#fields.hasErrors('description')}" th:errors="*{description}">
-                        </div>
-                    </div>
-
-                    <!-- Task Due Date -->
-                    <div class="form-floating" style="margin:10px 0px">
-                        <input type="date" data-date-format='yyyy-MM-dd' class="form-control" id="date" th:field="*{date}" placeholder="yyyy-MM-dd"/>
-                        <label for="date">Due date</label>
-                        <div class="text text-warning"
-                             th:if="${#fields.hasErrors('date')}" th:errors="*{date}">
-                        </div>
-                    </div>
-
-                    <!-- Task Tag -->
-                    <div class="form-floating" style="margin:10px 0px">
-                        <input type="text" class="form-control" id="tag" th:field="*{tag}" placeholder="Give your task a memorable tag"/>
-                        <label for="tag">Tag</label>
-                        <div class="text text-warning"
-                             th:if="${#fields.hasErrors('tag')}" th:errors="*{tag}">
-                        </div>
-                    </div>
-
-                    <!-- Task Priority select -->
-                    <div class="form-floating" style="margin:10px 0px">
-                        <select class="form-select" id="priority" th:field="*{priority}">
-                            <option selected th:value="Normal"></option>
-                            <option th:value="Trivial" th:text="Trivial"></option>
-                            <option th:value="Normal" th:text="Normal"></option>
-                            <option th:value="Urgent" th:text="Urgent"></option>
-                        </select>
-                        <label for="priority">Priority</label>
-                        <div class="text text-warning"
-                             th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}">
-                        </div>
-                    </div>
-
-<!--                    <div class="row"  style="margin:10px 0px">-->
-<!--                        <input type="submit" value="Save Task" class="btn btn-dark"/>-->
-<!--                    </div>-->
-
+            <!-- Task Name -->
+            <div class="form-floating" style="margin:10px 0px">
+                <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Give your task a name" autofocus="autofocus"
+                       th:classappend="${not #lists.isEmpty(#fields.errors('name'))} ? is-invalid" required/>
+                <label for="name">Title</label>
+                <div class="invalid-feedback">
+                    <p th:each="error: ${#fields.errors('name')}" th:text="${error}">Invalid name</p>
+                </div>
             </div>
-            </form>
+
+            <!-- Task Description -->
+            <div class="form-floating" style="margin:10px 0px">
+                <input type="text" class="form-control" id="description" th:field="*{description}" placeholder="Describe your task"
+                       th:classappend="${not #lists.isEmpty(#fields.errors('description'))} ? is-invalid" required/>
+                <label for="description">Description</label>
+                <div class="invalid-feedback">
+                    <p th:each="error: ${#fields.errors('name')}" th:text="${error}">Invalid description</p>
+                </div>
+            </div>
+
+            <!-- Task Due Date -->
+            <div class="form-floating" style="margin:10px 0px">
+                <input type="date" data-date-format='yyyy-MM-dd' class="form-control" id="date" th:field="*{date}" placeholder="yyyy-MM-dd"
+                       th:classappend="${not #lists.isEmpty(#fields.errors('date'))} ? is-invalid" required/>
+                <label for="date">Due date</label>
+                <div class="invalid-feedback">
+                    <p th:each="error: ${#fields.errors('date')}" th:text="${error}">Invalid date</p>
+                </div>
+            </div>
+
+            <!-- Task Tag -->
+            <div class="form-floating" style="margin:10px 0px">
+                <input type="text" class="form-control" id="tag" th:field="*{tag}" placeholder="Give your task a memorable tag"
+                       th:classappend="${not #lists.isEmpty(#fields.errors('tag'))} ? is-invalid"/>
+                <label for="tag">Tag</label>
+                <div class="invalid-feedback">
+                    <p th:each="error: ${#fields.errors('tag')}" th:text="${tag}">Invalid tag</p>
+                </div>
+            </div>
+
+            <!-- Task Priority select -->
+            <div class="form-floating" style="margin:10px 0px">
+                <select class="form-select" id="priority" th:field="*{priority}">
+                    <option selected th:value="Normal" th:text="Choose..."></option>
+                    <option th:value="Trivial" th:text="Trivial"></option>
+                    <option th:value="Normal" th:text="Normal"></option>
+                    <option th:value="Urgent" th:text="Urgent"></option>
+                </select>
+                <label for="priority">Priority</label>
+                <div class="invalid-feedback">
+                    <p th:each="error: ${#fields.errors('priority')}" th:text="${priority}">Invalid priority</p>
+                </div>
+            </div>
+
+            <div class="row"  style="margin:10px 0px">
+                <input type="submit" value="Add Task" class="btn btn-primary"/>
+            </div>
+
+        </div>
+    </form>
 </div>
 
 </body>

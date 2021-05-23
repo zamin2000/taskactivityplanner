@@ -13,9 +13,9 @@
         <a class="navbar-brand" href="/tasks">Task Activity Planner</a>
         <div class="btn-group">
             <!-- Account button, labelled with user's email address (from spring security) -->
-            <a class="btn btn-outline-light" href="/tasks">manager@mail.com</a>
+            <a class="btn btn-outline-light" href="/tasks" sec:authentication="name">Account</a>
             <!-- Logout button, uses javascript to submit the form without impacting look of button -->
-            <form action="/logout" method="post" name="logoutForm" hidden="hidden"><input type="hidden" name="_csrf" value="900895de-ec78-452a-98d8-c30ec7a434a4"/></form>
+            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm"></form>
             <a href="javascript: document.logoutForm.submit()" type="submit" class="btn btn-outline-light">Logout</a>
         </div>
     </div>
@@ -27,17 +27,15 @@
         <div class="d-flex flex-row" id="navbarNav">
             <ul class="navbar-nav">
                 <!-- All Tasks list -->
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/tasks">All Tasks</a>
-                </li>
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/tasks">All Tasks</a> </li>
                 <!-- Important Tasks -->
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/urgent-tasks">Urgent Tasks</a>
-                </li>
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/urgent-tasks">Urgent Tasks</a> </li>
+                <!-- Normal Tasks -->
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/normal-tasks">Normal Tasks</a> </li>
+                <!-- Trivial Tasks -->
+                <li class="nav-item"> <a class="nav-link" aria-current="page" href="/trivial-tasks">Trivial Tasks</a> </li>
                 <!-- Finished Tasks -->
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/finished-tasks">Finished Tasks</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="/finished-tasks">Finished Tasks</a></li>
             </ul>
         </div>
         <div> <!-- Add Task button -->
@@ -45,6 +43,14 @@
         </div>
     </div>
 </nav>
+
+<div class="container-fluid text-center" style="max-width: 50%">
+    <div class="row">
+        <form th:action="@{'/delete-user/'+${user.email}}" th:object="${user}" method="post">
+            <input type="submit" value="Delete forever" class="btn btn-danger btn-lg"/>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
