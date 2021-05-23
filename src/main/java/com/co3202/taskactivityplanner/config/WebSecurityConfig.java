@@ -43,7 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/css/**")
                 .permitAll()
-                .antMatchers("/account/**", "/tasks/**", "/add-task/**", "/edit-task/**")
+                .antMatchers("/account/**", "/tasks/**", "/add-task/**", "/edit-task/**",
+                        "/urgent-tasks", "/normal-tasks", "/trivial-tasks", "/finished-tasks")
                 .hasAnyRole("USER, ADMIN")
                 .and().formLogin().loginPage("/login")
                 .permitAll()

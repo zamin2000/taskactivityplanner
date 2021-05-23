@@ -17,6 +17,10 @@ public interface TaskService {
 
     List<Task> findByOwnerOrderByDate(User user);
 
+    List<Task> findByPriorityOrderByDate(String priority);
+
+    List<Task> findByIsDone (Boolean isDone);
+
     void setTaskDone(UUID id);
 
     void setTaskNotDone(UUID id);

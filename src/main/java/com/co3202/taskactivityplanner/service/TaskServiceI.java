@@ -46,6 +46,16 @@ public class TaskServiceI implements TaskService {
     }
 
     @Override
+    public List<Task> findByPriorityOrderByDate(String priority) {
+        return taskDao.findByPriorityOrderByDate(priority);
+    }
+
+    @Override
+    public List<Task> findByIsDone(Boolean isDone) {
+        return taskDao.findByIsDone(isDone);
+    }
+
+    @Override
     public void setTaskDone(UUID id) {
         Task task = taskDao.getOne(id);
         task.setDone(true);

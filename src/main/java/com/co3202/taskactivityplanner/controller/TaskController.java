@@ -95,4 +95,48 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+    @GetMapping("/urgent-tasks")
+    public String showUrgentTasks(Model model, Principal principal) {
+        // Authentication
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        // Sending task object to thymeleaf, to access user tasks
+        model.addAttribute("user", user);
+        model.addAttribute("tasksOwned", taskService.findByPriorityOrderByDate("Urgent"));
+        return "urgent-tasks";
+    }
+
+    @GetMapping("/normal-tasks")
+    public String showNormalTasks(Model model, Principal principal) {
+        // Authentication
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        // Sending task object to thymeleaf, to access user tasks
+        model.addAttribute("user", user);
+        model.addAttribute("tasksOwned", taskService.findByPriorityOrderByDate("Normal"));
+        return "normal-tasks";
+    }
+
+    @GetMapping("/trivial-tasks")
+    public String showTrivialTasks(Model model, Principal principal) {
+        // Authentication
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        // Sending task object to thymeleaf, to access user tasks
+        model.addAttribute("user", user);
+        model.addAttribute("tasksOwned", taskService.findByPriorityOrderByDate("Trivial"));
+        return "trivial-tasks";
+    }
+
+    @GetMapping("/finished-tasks")
+    public String showFinishedTasks(Model model, Principal principal) {
+        // Authentication
+        String email = principal.getName();
+        User user = userService.getUserByEmail(email);
+        // Sending task object to thymeleaf, to access user tasks
+        model.addAttribute("user", user);
+        model.addAttribute("tasksOwned", taskService.findByIsDone(true));
+        return "finished-tasks";
+    }
+
 }

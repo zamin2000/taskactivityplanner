@@ -12,4 +12,9 @@ import java.util.UUID;
 public interface TaskDao extends JpaRepository<Task, UUID> {
     List<Task> findByOwnerOrderByDate(User user);
     // select t from task where t.owner = ?1
+
+    List<Task> findByPriorityOrderByDate(String priority);
+
+    List<Task> findByIsDone(Boolean isDone);
+
 }
