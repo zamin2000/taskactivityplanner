@@ -68,4 +68,33 @@ public class User {
                 .collect(Collectors.toList());
     }
 
+    // Returns a stream of those tasks which are not finished/still in progress.
+    public List<Task> getTasksDone() {
+        return tasksOwned.stream()
+                .filter(task -> task.isDone())
+                .collect(Collectors.toList());
+    }
+
+
+    // Returns a stream of those tasks which are Normal priority.
+    public List<Task> getTasksPriorityTrivial() {
+        return tasksOwned.stream()
+                .filter(task -> task.getPriority().equals("Trivial"))
+                .collect(Collectors.toList());
+    }
+
+    // Returns a stream of those tasks which are Normal priority.
+    public List<Task> getTasksPriorityNormal() {
+        return tasksOwned.stream()
+                .filter(task -> task.getPriority().equals("Normal"))
+                .collect(Collectors.toList());
+    }
+
+    // Returns a stream of those tasks which are Urgent priority.
+    public List<Task> getTasksPriorityUrgent() {
+        return tasksOwned.stream()
+                .filter(task -> task.getPriority().equals("Urgent"))
+                .collect(Collectors.toList());
+    }
+
 }

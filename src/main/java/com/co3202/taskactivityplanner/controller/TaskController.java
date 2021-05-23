@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -95,14 +96,16 @@ public class TaskController {
         return "redirect:/tasks";
     }
 
+
     @GetMapping("/urgent-tasks")
     public String showUrgentTasks(Model model, Principal principal) {
         // Authentication
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-        // Sending task object to thymeleaf, to access user tasks
+        // Sending List of Tasks from method getTasksPriorityXXX to thymeleaf
+        // To display user's specific tasks of said priority
         model.addAttribute("user", user);
-        model.addAttribute("tasksOwned", taskService.findByPriorityOrderByDate("Urgent"));
+        model.addAttribute("tasksOwned", user.getTasksPriorityUrgent());
         return "urgent-tasks";
     }
 
@@ -111,9 +114,10 @@ public class TaskController {
         // Authentication
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-        // Sending task object to thymeleaf, to access user tasks
+        // Sending List of Tasks from method getTasksPriorityXXX to thymeleaf
+        // To display user's specific tasks of said priority
         model.addAttribute("user", user);
-        model.addAttribute("tasksOwned", taskService.findByPriorityOrderByDate("Normal"));
+        model.addAttribute("tasksOwned", user.getTasksPriorityNormal());
         return "normal-tasks";
     }
 
@@ -122,9 +126,10 @@ public class TaskController {
         // Authentication
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-        // Sending task object to thymeleaf, to access user tasks
+        // Sending List of Tasks from method getTasksPriorityXXX to thymeleaf
+        // To display user's specific tasks of said priority
         model.addAttribute("user", user);
-        model.addAttribute("tasksOwned", taskService.findByPriorityOrderByDate("Trivial"));
+        model.addAttribute("tasksOwned", user.getTasksPriorityTrivial());
         return "trivial-tasks";
     }
 
@@ -133,9 +138,10 @@ public class TaskController {
         // Authentication
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
-        // Sending task object to thymeleaf, to access user tasks
+        // Sending List of Tasks from method getTasksPriorityXXX to thymeleaf
+        // To display user's specific tasks of said priority
         model.addAttribute("user", user);
-        model.addAttribute("tasksOwned", taskService.findByIsDoneOrderByDate(true));
+        model.addAttribute("tasksOwned", user.getTasksDone());
         return "finished-tasks";
     }
 
