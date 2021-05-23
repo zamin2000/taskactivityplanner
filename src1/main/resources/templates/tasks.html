@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Your Tasks</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css} "/>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/tasks">Task Activity Planner</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-outline-light">Logout</button>
+        </form>
+    </div>
+</nav>
+
+<!-- Navigation bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Tasks list -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/tasks">Your Tasks</a>
+                </li>
+                <!-- User account -->
+                <li class="nav-item" >
+                    <a class="nav-link" href="/account">Your Account</a>
+                </li>
+            </ul>
+        </div>
+        <!-- New Task button -->
+        <a class="btn btn-dark" type="button"
+           href="/new-task">New Task (+)</a>
+    </div>
+</nav>
+
+<!-- Tasks Table List -->
+<table class="table table-borderless align-middle">
+    <thead>
+        <tr>
+            <th class="text-center" style="width:15%" scope="col">Title</th>
+            <th class="text-center" style="width:30%" scope="col">Description</th>
+            <th class="text-center" style="width:10%" scope="col">Due date</th>
+            <th class="text-center" style="width:5%" scope="col">Days</th>
+            <th class="text-center" style="width:10%" scope="col">Priority</th>
+            <th class="text-center" style="width:10%" scope="col">Tag</th>
+            <th class="text-center" style="width:10%" scope="col">Done?</th>
+            <th class="text-center" style="width:5%" scope="col"></th>
+            <th class="text-center" style="width:5%" scope="col"></th>
+        </tr>
+    </thead>
+    <div class="container">
+        <tbody>
+            <!-- For each task in tasksOwned table -->
+            <tr class="text-center"
+                th:each="task : ${tasksOwned}"
+                th:styleappend="${task.priority =='Urgent'}?'color:red;'">
+                <td th:text="${task.name}"></td>
+                <td th:text="${task.description}"></td>
+                <td th:text="${#temporals.format(task.date, 'dd-MMM-yyyy')}"></td>
+                <td th:text="${task.daysRemaining(task.date)}"></td>
+                <td th:text="${task.priority}"></td>
+                <td th:text="${task.tag}"></td>
+                <td>
+                    <div th:switch="${task.isDone}">
+                        <span th:case="${true}">
+                        <form th:object="${task}" th:action="@{'/set-undone/'+${task.id}}" method="post">
+                            <input type="submit" value="✓" class="btn btn-success btn-sm"/>
+                        </form>
+                        </span>
+                        <span th:case="${false}">
+                            <form th:object="${task}" th:action="@{'/set-done/'+${task.id}}" method="post">
+                            <input type="submit" value="✓" class="btn btn-outline-light btn-sm"/>
+                        </form>
+                        </span>
+                    </div>
+                </td>
+                <td>
+                    <a th:href="${'/edit-task/' + task.id}" class="btn btn-light btn-sm">Edit</a>
+                </td>
+                <td>
+                    <a th:href="${'/delete-task/' + task.id}" class="btn btn-danger btn-sm">Erase</a>
+                </td>
+            </tr>
+        </tbody>
+    </div>
+</table>
+
+</body>
+</html>
