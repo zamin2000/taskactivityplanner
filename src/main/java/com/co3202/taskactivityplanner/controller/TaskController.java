@@ -141,7 +141,7 @@ public class TaskController {
         // Sending List of Tasks from method getTasksPriorityXXX to thymeleaf
         // To display user's specific tasks of said priority
         model.addAttribute("user", user);
-        model.addAttribute("tasksOwned", user.getTasksDone());
+        model.addAttribute("tasksOwned", user.getTasksIsDone());
         return "finished-tasks";
     }
 
