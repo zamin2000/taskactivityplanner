@@ -19,7 +19,7 @@ public interface TaskService {
 
     List<Task> findByPriorityOrderByDate(String priority);
 
-    List<Task> findByIsDone (Boolean isDone);
+    List<Task> findByIsDoneOrderByDate (Boolean isDone);
 
     void setTaskDone(UUID id);
 

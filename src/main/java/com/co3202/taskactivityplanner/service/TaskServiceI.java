@@ -51,8 +51,8 @@ public class TaskServiceI implements TaskService {
     }
 
     @Override
-    public List<Task> findByIsDone(Boolean isDone) {
-        return taskDao.findByIsDone(isDone);
+    public List<Task> findByIsDoneOrderByDate(Boolean isDone) {
+        return taskDao.findByIsDoneOrderByDate(isDone);
     }
 
     @Override

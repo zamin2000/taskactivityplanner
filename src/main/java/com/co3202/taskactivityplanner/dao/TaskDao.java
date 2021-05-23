@@ -15,6 +15,6 @@ public interface TaskDao extends JpaRepository<Task, UUID> {
 
     List<Task> findByPriorityOrderByDate(String priority);
 
-    List<Task> findByIsDone(Boolean isDone);
+    List<Task> findByIsDoneOrderByDate(Boolean isDone);
 
 }

@@ -135,7 +135,7 @@ public class TaskController {
         User user = userService.getUserByEmail(email);
         // Sending task object to thymeleaf, to access user tasks
         model.addAttribute("user", user);
-        model.addAttribute("tasksOwned", taskService.findByIsDone(true));
+        model.addAttribute("tasksOwned", taskService.findByIsDoneOrderByDate(true));
         return "finished-tasks";
     }
 
