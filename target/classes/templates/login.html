@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css} "/>
+</head>
+<body class="bg-dark">
+
+<!-- Header -->
+<nav class="navbar navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Task Activity Planner</a>
+        <div sec:authorize="isAuthenticated()" class="btn-group">
+            <!-- Account button, labelled with user's email address (from spring security) -->
+            <a class="btn btn-outline-light" href="/tasks" sec:authentication="name">Account</a>
+            <!-- Logout button, uses javascript to submit the form without impacting look of button -->
+            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm"></form>
+            <a href="javascript: document.logoutForm.submit()" type="submit" class="btn btn-outline-light">Logout</a>
+        </div>
+        <div sec:authorize="isAnonymous()" class="btn-group">
+            <a href="/" type="submit" class="btn btn-outline-light">Register</a>
+            <a type="submit" class="btn btn-light">Login</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Error validation warning -->
+<div class="alert alert-warning" th:if="${param.error}">
+    <h4>Your email or password is incorrect</h4>
+</div>
+
+<!-- Page Heading -->
+<div class="text-center text-light" style="margin: 25px 0px;">
+    <h2 class="text-center">Sign in with your email</h2>
+</div>
+
+<!-- Login form -->
+<div class="container-fluid" style="max-width: 50%">
+    <form class="text-center" th:action="@{/login}" method="post">
+        <!-- Email input -->
+        <div class="form-floating" style="margin:10px 0px">
+            <input type="email" class="form-control" id="email" name="username" autofocus="autofocus" required
+                   th:classappend="${param.error} ? is-invalid">>
+            <label for="email">Email address</label>
+        </div>
+        <!-- Password input -->
+        <div class="form-floating" style="margin:10px 0px">
+            <input type="password" class="form-control" id="password" name="password" required
+                   th:classappend="${param.error} ? is-invalid">
+            <label for="password">Password</label>
+        </div>
+        <!-- Submit button -->
+        <button class="btn btn-block btn-lg btn-primary" style="margin:10px 0px" type="submit">Sign in</button>
+    </form>
+</div>
+
+</body>
+</html>
