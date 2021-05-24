@@ -78,6 +78,15 @@
                 </div>
             </div>
 
+            <!-- Task Time Due -->
+            <div class="form-floating" style="margin:10px 0px">
+                <input type="time" data-date-format='HH:mm' class="form-control" id="time" th:field="*{time}">
+                <label for="time">Time due</label>
+                <div class="text text-warning"
+                     th:if="${#fields.hasErrors('time')}" th:errors="*{time}">
+                </div>
+            </div>
+
             <!-- Task Tag -->
             <div class="form-floating" style="margin:10px 0px">
                 <input type="text" class="form-control" id="tag" th:field="*{tag}" placeholder="Give your task a memorable tag"/>

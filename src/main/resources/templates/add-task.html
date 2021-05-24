@@ -73,11 +73,21 @@
 
             <!-- Task Due Date -->
             <div class="form-floating" style="margin:10px 0px">
-                <input type="date" data-date-format='yyyy-MM-dd' class="form-control" id="date" th:field="*{date}" placeholder="yyyy-MM-dd"
+                <input type="date" class="form-control" id="date" th:field="*{date}" placeholder="yyyy-MM-dd"
                        th:classappend="${not #lists.isEmpty(#fields.errors('date'))} ? is-invalid" required/>
-                <label for="date">Due date</label>
+                <label for="date">Date due</label>
                 <div class="invalid-feedback">
                     <p th:each="error: ${#fields.errors('date')}" th:text="${error}">Invalid date</p>
+                </div>
+            </div>
+
+            <!-- Task Time Due -->
+            <div class="form-floating" style="margin:10px 0px">
+                <input type="time" data-date-format='HH:mm' class="form-control" id="time" th:field="*{time}"
+                       th:classappend="${not #lists.isEmpty(#fields.errors('time'))} ? is-invalid" required/>
+                <label for="time">Time due</label>
+                <div class="invalid-feedback">
+                    <p th:each="error: ${#fields.errors('time')}" th:text="${error}">Invalid time</p>
                 </div>
             </div>
 

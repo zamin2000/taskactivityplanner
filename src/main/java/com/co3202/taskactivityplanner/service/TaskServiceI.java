@@ -25,6 +25,7 @@ public class TaskServiceI implements TaskService {
         task.setName(newTask.getName());
         task.setDescription(newTask.getDescription());
         task.setDate(newTask.getDate());
+        task.setTime(newTask.getTime());
         task.setTag(newTask.getTag());
         task.setPriority(newTask.getPriority());
         taskDao.save(task);

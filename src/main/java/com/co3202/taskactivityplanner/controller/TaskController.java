@@ -38,7 +38,7 @@ public class TaskController {
 
     // Sends add task form with task owner pre-set
     @GetMapping("/add-task")
-    public String newTask(Model model, Principal principal, SecurityContextHolderAwareRequestWrapper request) {
+    public String newTask(Model model, Principal principal) {
         String email = principal.getName();
         User user = userService.getUserByEmail(email);
         // When sending new task form, also sending a pre-filled Task with the user info details pre-entered.

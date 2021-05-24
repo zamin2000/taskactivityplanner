@@ -16,6 +16,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
@@ -44,6 +46,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         roleService.findAll().stream().map(role -> "saved role: " + role.getRole()).forEach(logger::info);
 
         LocalDate today = LocalDate.now();
+        LocalTime now = LocalTime.now();
 
         // Creating default user
         User myUser1 = new User(
@@ -55,7 +58,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         // Creating random task for myUser1
         Task myTask1 = new Task(
-                "Task 1", "Urgent Task due today, and is done", today, true, "Urgent", "Tag", myUser1);
+                "Task 1", "Urgent Task due today, and is done", today, now, true, "Urgent", "Tag", myUser1);
         taskService.createTask(myTask1);
 
         // Creating second user
@@ -68,11 +71,11 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
         // Creating random task for myUser1
         Task myTask2 = new Task(
-                "Task 2", "Normal Task due yesterday", today.minusDays(1), false, "Normal", "Tag", myUser1);
+                "Task 2", "Normal Task due yesterday", today.minusDays(1), now.minusHours(1), false, "Normal", "Tag", myUser1);
         taskService.createTask(myTask2);
 
         taskService.createTask(new Task(
-                "Task 3", "Normal Task due tomorrow", today.plusDays(1), false, "Normal", "Tag", myUser1));
+                "Task 3", "Normal Task due tomorrow", today.plusDays(1), now.plusHours(1), false, "Normal", "Tag", myUser1));
 
     }
 

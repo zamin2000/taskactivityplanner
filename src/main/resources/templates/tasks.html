@@ -76,7 +76,7 @@
             <!-- First calculates the day name the task is due, using thymeleaf function and passing through task date from object -->
             <!-- Then converts the format of the date into one which is more readable -->
             <!-- These 2 values are concatenated into one item of text which is shown to user -->
-            <td th:text="|${#temporals.dayOfWeekNameShort(task.date)} ${#temporals.format(task.date, 'dd MMM')}|"></td>
+            <td th:text="|${#temporals.dayOfWeekNameShort(task.date)} ${#temporals.format(task.date, 'dd MMM')} at ${#temporals.format(task.time, 'HH:mm')}|"></td>
             <!-- Number days remaining til due date -->
             <!-- Calls function 'daysRemaining' from Task class and passes task due date from object -->
             <!-- Returns an int value and stores this in variable 'days' -->

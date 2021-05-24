@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
@@ -32,6 +33,8 @@ public class Task {
     @NotNull()
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime time;
     private boolean isDone;
     private String priority;
     private String tag;
@@ -39,10 +42,11 @@ public class Task {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    public Task(@NotEmpty() String name, @NotEmpty() String description, @NotNull() LocalDate date, boolean isDone, String priority, String tag, User owner) {
+    public Task(@NotEmpty() String name, @NotEmpty() String description, @NotNull() LocalDate date, LocalTime time, boolean isDone, String priority, String tag, User owner) {
         this.name = name;
         this.description = description;
         this.date = date;
+        this.time = time;
         this.isDone = isDone;
         this.priority = priority;
         this.tag = tag;
