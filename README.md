@@ -34,7 +34,7 @@ docker ps
 
 Verify that the application builds successfully (optional) 
 ```shell
-docker log -f <container id>
+docker logs -f <container id>
 ```
 
 See the application running in a browser
