@@ -1,7 +1,7 @@
 # Task Activity Planner
 
-### Prerequisites
-In order to run this container you'll need Docker installed on your machine.
+## Prerequisites
+In order to run this container, you'll need Docker installed on your machine.
 
 [Get Docker](https://docs.docker.com/get-docker/)
 
@@ -27,7 +27,7 @@ Build the Spring image
 docker-compose -f spring.yaml up --build -d
 ```
 
-Verify that the two containers are running
+Verify that the two images are running
 ```shell
 docker ps
 ```
@@ -42,3 +42,12 @@ See the application running in a browser
 localhost:8080
 ```
 
+## Frameworks
+Spring Boot
+Spring Security
+MySQL
+Maven
+Thymeleaf
+Bootstrap
+
+## Acknowledgements
