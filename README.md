@@ -37,7 +37,7 @@ Verify that the application builds successfully (optional)
 docker log -f <container id>
 ```
 
-See the application running
+See the application running in a browser
 ```shell
 localhost:8080
 ```
