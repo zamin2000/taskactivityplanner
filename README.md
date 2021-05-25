@@ -1,9 +1,44 @@
 # Task Activity Planner
 
-## Information about this repository
+### Prerequisites
+In order to run this container you'll need Docker installed on your machine.
 
-This is the repository that you are going to use **individually** for developing your project. Please use the resources provided in the module to learn about **plagiarism** and how plagiarism awareness can foster your learning.
+[Get Docker](https://docs.docker.com/get-docker/)
 
-Regarding the use of this repository, once a feature (or part of it) is developed and **working** or parts of your system are integrated and **working**, define a commit and push it to the remote repository. You may find yourself making a commit after a productive hour of work (or even after 20 minutes!), for example. Choose commit message wisely and be concise.
+## Usage
 
-Please choose the structure of the contents of this repository that suits the needs of your project but do indicate in this file where the main software artefacts are located.
+Clone this repository
+```shell
+git clone https://campus.cs.le.ac.uk/gitlab/ug_project/20-21/za103.git
+```
+
+Enter the new directory
+```shell
+cd za103
+```
+
+Build the MySQL container
+```shell
+docker-compose up -d
+```
+
+Build the Spring container
+```shell
+docker-compose -f spring.yaml up --build -d
+```
+
+Verify that the two containers are running (optional)
+```shell
+docker ps
+```
+
+Verify that the application builds successfully (optional) 
+```shell
+docker log -f <container id>
+```
+
+Access the application
+```shell
+localhost:8080
+```
+
