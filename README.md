@@ -1,4 +1,5 @@
 # Task Activity Planner
+CO3202 Final Project
 
 ## Prerequisites
 In order to run this container, you'll need Docker installed on your machine.
@@ -43,11 +44,12 @@ localhost:8080
 ```
 
 ## Frameworks
-Spring Boot
-Spring Security
-MySQL
-Maven
-Thymeleaf
-Bootstrap
+- Spring Boot
+- Spring Security
+- MySQL
+- Docker
+- Maven
+- Thymeleaf
+- Bootstrap
 
 ## Acknowledgements
