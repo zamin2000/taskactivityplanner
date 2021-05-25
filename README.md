@@ -27,7 +27,7 @@ Build the Spring container
 docker-compose -f spring.yaml up --build -d
 ```
 
-Verify that the two containers are running (optional)
+Verify that the two containers are running
 ```shell
 docker ps
 ```
