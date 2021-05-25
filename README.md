@@ -17,12 +17,12 @@ Enter the new directory
 cd za103
 ```
 
-Build the MySQL container
+Build the MySQL image
 ```shell
 docker-compose up -d
 ```
 
-Build the Spring container
+Build the Spring image
 ```shell
 docker-compose -f spring.yaml up --build -d
 ```
@@ -37,7 +37,7 @@ Verify that the application builds successfully (optional)
 docker log -f <container id>
 ```
 
-Access the application
+See the application running
 ```shell
 localhost:8080
 ```
