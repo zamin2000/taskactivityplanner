@@ -1,7 +1,14 @@
 # Task Activity Planner
 CO3202 Final Project
 
-## Prerequisites
+## Heroku
+You can access Task Activity Planner from the link I have deployed to here:
+
+https://task-activity-planner.herokuapp.com/
+
+## Docker
+Alternatively, run the application from a Docker container
+
 In order to run this container, you'll need Docker installed on your machine.
 
 [Get Docker](https://docs.docker.com/get-docker/)
@@ -43,13 +50,14 @@ See the application running in a browser
 localhost:8080
 ```
 
-## Frameworks
+## Frameworks used
 - Spring Boot
 - Spring Security
 - MySQL
+- PostgreSQL
+- Heroku
 - Docker
 - Maven
 - Thymeleaf
 - Bootstrap
 
-## Acknowledgements
